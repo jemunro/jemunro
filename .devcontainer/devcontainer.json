@@ -1,0 +1,26 @@
+{
+  "name": "Quarto Portfolio",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+      "version": "release"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "quarto.quarto",
+        "redhat.vscode-yaml",
+        "anthropic.claude-code"
+      ]
+    }
+  },
+  // Quarto's preview server: `quarto preview --port 4200`
+  "forwardPorts": [4200],
+  "portsAttributes": {
+    "4200": {
+      "label": "Quarto preview",
+      "onAutoForward": "notify"
+    }
+  }
+}
