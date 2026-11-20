@@ -10,8 +10,8 @@ Build a minimal Quarto/GitHub Pages portfolio with a **Publications** homepage a
 | 0 | Reproducible Codespaces environment | In progress / verify |
 | 1 | Website shell and private preview | Complete |
 | 2 | Placeholder catalogue entries and presentation | Complete |
-| 3 | Editable Markdown content model | Complete (awaiting review) |
-| 4 | Search, filters, featured ordering | Complete (awaiting review) |
+| 3 | Editable Markdown content model | Complete |
+| 4 | Search, filters, featured ordering | Complete |
 | 5 | GitHub Pages deployment | Not started |
 | 6 | Manual ORCID publication import | Not started |
 | 7 | Identity matching, preprint relationships and exclusions | Not started |
@@ -107,7 +107,7 @@ Record milestone completion dates, decisions and relevant caveats here as the pr
 - Dev-environment additions: `.devcontainer/start-preview.sh` starts the private preview on attach; do not run `quarto render` into `_site/` while previewing (see `DEVELOPMENT.md`).
 - Review caveat: layout was checked by the site owner in the Codespaces preview; no automated visual/mobile test exists.
 
-### 2026-11-20 — Stage 3 complete (awaiting review)
+### 2026-11-20 — Stage 3 complete (reviewed and approved)
 - Entries moved from hardcoded HTML to one Markdown file each: `content/publications/*.md`, `content/software/*.md` (YAML front matter + short Markdown body). Pages contain only `{{< catalogue publications >}}` / `{{< catalogue software >}}`. Schema, curated-vs-bibliographic field split and an add-entry example: `content/README.md`.
 - Publication fields: `id`, `title`, `doi`, `authors`, `date`, `venue`, `status` (preprint/published), `featured`, `roles` (list: first/senior/corresponding/coauthor), `tags`, `related-software`, `exclude`. Software fields: `id`, `title`, `github`, `date` (ordering only), `featured`, `tags`, `related-publications`, `exclude`.
 - Decision — custom Lua shortcode instead of a native Quarto listing: a listing was prototyped and rejected because (a) it cannot expose the Markdown body as the description (descriptions came back empty, even with the default template), (b) it forces rendering of a detail page per entry, contrary to the "no project-detail pages" design, and (c) it cannot join publications to software. `catalogue.lua` (~205 lines) reads the files, validates them, sorts and emits the same markup as Stage 2. No new dependencies.
@@ -119,7 +119,7 @@ Record milestone completion dates, decisions and relevant caveats here as the pr
 - Not verified: visual appearance in a browser (markup unchanged, so none expected).
 - Note: the acceptance criterion says "README"; the root `README.md` is the GitHub profile README (untouched), so the schema is in `content/README.md`.
 
-### 2026-11-20 — Stage 4 complete (awaiting review)
+### 2026-11-20 — Stage 4 complete (reviewed and approved)
 - Added to both catalogues: text search (title, description and keywords; all words must match), keyword filtering by clicking keywords on entries (multi-select, AND; no separate keyword bar, active keywords are named in the status line), clickable keywords on every entry, a sort menu, a Clear button (shown only when something is active), a result count and a "no results" message with a clear button. State is per page, so Publications and Software are independent.
 - Layout: the search box, sort menu and Clear button sit in the tab bar to the right of the tabs (JS moves them there), wrapping under the tabs on narrow screens.
 - Decision — native Quarto listings were not used (rejected in Stage 3 for reasons that still hold, and they cannot produce the featured-first ordering over Markdown-body descriptions without detail pages). Instead one small vanilla-JS file, `_extensions/profile/catalogue.js` (~140 lines, no dependencies), is attached by the `catalogue` shortcode. It derives search text and keyword filters from the rendered entries, so adding a Markdown entry makes it searchable and its keywords filterable with no other change. Keywords match case-insensitively (the first spelling is displayed). No JavaScript: the plain list still shows in default order and keywords are inert buttons.
