@@ -1,0 +1,9 @@
+{{< var bio >}}
+
+**Research focus**
+
+{{< var research_focus >}}
+
+**Profiles**
+
+{{< profile-links >}}

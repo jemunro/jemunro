@@ -1,0 +1,20 @@
+---
+pagetitle: "Software — {{< var name >}}"
+---
+
+{{< include _partials/header.qmd >}}
+
+::: {.profile-layout}
+
+::: {.profile-sidebar}
+{{< include _partials/sidebar.qmd >}}
+:::
+
+::: {.profile-main}
+{{< site-tabs >}}
+
+
+*The software catalogue will appear here.*
+:::
+
+:::

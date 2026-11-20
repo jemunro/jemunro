@@ -16,7 +16,7 @@ Build a minimal, maintainable personal academic portfolio using **Quarto**, deve
 
 ## Agreed website design
 - The **Publications** catalogue is the homepage; **Software** is the other main tab.
-- A compact header displays name, qualifications, position and affiliation.
+- A compact full-width header displays name, qualifications, position and affiliation. Below it: sidebar on the left; on the right the Publications/Software tabs (current tab clearly marked, page titles not repeated as headings) above the content.
 - A persistent desktop sidebar contains a short bio and links to GitHub, ORCID, Google Scholar, WEHI profile, LinkedIn, email and CV; it adapts to mobile.
 - Catalogue entries use compact lists rather than large cards: title, relevant metadata, a 1–2 sentence description, shared keywords and external links.
 - Featured entries are manually pinned above regular entries. Regular entries are reverse chronological.
