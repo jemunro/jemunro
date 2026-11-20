@@ -94,7 +94,7 @@ Record milestone completion dates, decisions and relevant caveats here as the pr
 
 ### 2026-11-20 — Stage 1 complete (reviewed and approved)
 - Quarto website shell: full-width header (name, qualifications, position, affiliation); below it a left sidebar (bio, research focus, profile links) and a right column with Publications (homepage) / Software tabs above the content; light/dark themes (cosmo/darkly) with Quarto's native toggle. Layout revised after first review (tabs moved from top bar into the content column; no repeated page headings).
-- Profile data centralised in `_variables.yml`; a small local shortcode (`_extensions/profile`) renders only the links that are defined, so WEHI/LinkedIn/email/CV/photo can be added later by adding a key (photo support not yet built).
+- Profile data centralised in `_variables.yml`; a small local shortcode (`_extensions/profile`) renders only the links that are defined, so further profile links (e.g. institution page, LinkedIn, email, CV) and a photo can be added later by adding a key (photo support not yet built).
 - Decisions: `page-layout: custom` with a CSS grid and no Quarto navbar (its sidebar is navigation-only and a navbar cannot read `_variables.yml`); tabs come from a local `site-tabs` shortcode; header/tab markup uses raw HTML where needed because Quarto merges headings into section wrappers; `_quarto.yml` renders only `*.qmd`, so README.md (the GitHub profile README) is untouched.
 - Verified: `quarto render` succeeds without warnings; both pages serve via `quarto preview` on port 4200; active-tab marking, links and titles present in rendered HTML. User reviewed the layout visually and approved it.
 - Docs: see `DEVELOPMENT.md`.
