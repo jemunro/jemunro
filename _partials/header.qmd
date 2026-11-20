@@ -1,9 +1,0 @@
-::: {.profile-header}
-::: {.profile-header-inner}
-```{=html}
-<h1>{{< var name >}}</h1>
-```
-
-{{< var qualifications >}} · {{< var position >}}, {{< var affiliation >}}
-:::
-:::
