@@ -9,7 +9,7 @@ Build a minimal Quarto/GitHub Pages portfolio with a **Publications** homepage a
 |---|---|---|
 | 0 | Reproducible Codespaces environment | In progress / verify |
 | 1 | Website shell and private preview | Complete |
-| 2 | Placeholder catalogue entries and presentation | Not started |
+| 2 | Placeholder catalogue entries and presentation | Complete |
 | 3 | Editable Markdown content model | Not started |
 | 4 | Search, filters, featured ordering | Not started |
 | 5 | GitHub Pages deployment | Not started |
@@ -98,3 +98,11 @@ Record milestone completion dates, decisions and relevant caveats here as the pr
 - Decisions: `page-layout: custom` with a CSS grid and no Quarto navbar (its sidebar is navigation-only and a navbar cannot read `_variables.yml`); tabs come from a local `site-tabs` shortcode; header/tab markup uses raw HTML where needed because Quarto merges headings into section wrappers; `_quarto.yml` renders only `*.qmd`, so README.md (the GitHub profile README) is untouched.
 - Verified: `quarto render` succeeds without warnings; both pages serve via `quarto preview` on port 4200; active-tab marking, links and titles present in rendered HTML. User reviewed the layout visually and approved it.
 - Docs: see `DEVELOPMENT.md`.
+
+### 2026-11-20 — Stage 2 complete
+- Two sample publications and two sample software entries, supplied by the site owner, hardcoded as plain HTML in `index.qmd` and `software.qmd` (temporary; replaced in Stage 3). Both catalogues share one set of `.catalogue`/`.entry` styles in `styles.scss`: title (linked), metadata line, short description, keyword badges, external links; "Featured" and "First author" badges.
+- Not implemented (later stages): search/filtering, ordering logic, content files, any API/AI integration.
+- Verified: `quarto render` succeeds without warnings; each page contains its two entries; all external links return HTTP 200. Not verified: visual appearance at desktop/mobile widths (no browser available in the container) — needs review in the Codespaces preview.
+- Presentation decisions made during review: entries have no cross-links between tabs, only external links (publication venue/DOI and GitHub where relevant, labelled by venue name or "GitHub"); "academic navy" palette defined per mode in `theme-light.scss`/`theme-dark.scss` while `styles.scss` is shared so light and dark differ only in colour (system font stack, no web fonts); each featured entry has its own gold left rule; sidebar research focus shown as keyword chips and profile links have icons (Bootstrap Icons, bundled with Quarto; ORCID drawn in CSS).
+- Dev-environment additions: `.devcontainer/start-preview.sh` starts the private preview on attach; do not run `quarto render` into `_site/` while previewing (see `DEVELOPMENT.md`).
+- Review caveat: layout was checked by the site owner in the Codespaces preview; no automated visual/mobile test exists.

@@ -15,12 +15,15 @@
       ]
     }
   },
-  // Quarto's preview server: `quarto preview --port 4200`
+  // Start the Quarto preview each time you attach (script skips if already running).
+  // Log: /tmp/quarto-preview.log. Stop with: pkill -f "quarto preview"
+  "postAttachCommand": "bash .devcontainer/start-preview.sh",
   "forwardPorts": [4200],
   "portsAttributes": {
     "4200": {
       "label": "Quarto preview",
-      "onAutoForward": "notify"
+      "onAutoForward": "openBrowser",
+      "visibility": "private"
     }
   }
 }

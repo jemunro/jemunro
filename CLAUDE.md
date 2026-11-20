@@ -13,6 +13,7 @@ Build a minimal, maintainable personal academic portfolio using **Quarto**, deve
 - **Keep changes reviewable.** Make focused changes, avoid unrelated refactoring and record decisions that affect later work.
 - **Do not invent publication details, credentials, affiliations or citation metrics.** Use clearly labelled placeholders until verified information is supplied or retrieved.
 - **Never commit credentials or API keys.** Prefer environment secrets when those integrations are eventually introduced.
+- **Keep personal metadata out of `CLAUDE.md` and `PLAN.md`.** Do not write the owner's name, email address, affiliation, profile URLs, publication details or similar personal information into these files. Keep them generic (e.g. "the site owner"); personal details belong only in the site's content/config files.
 
 ## Agreed website design
 - The **Publications** catalogue is the homepage; **Software** is the other main tab.

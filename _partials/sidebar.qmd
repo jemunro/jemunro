@@ -2,7 +2,7 @@
 
 **Research focus**
 
-{{< var research_focus >}}
+{{< research-focus >}}
 
 **Profiles**
 

@@ -14,7 +14,26 @@ pagetitle: "Software — {{< var name >}}"
 {{< site-tabs >}}
 
 
-*The software catalogue will appear here.*
+<!-- TEMPORARY hardcoded sample entries (Stage 2). Replaced by Markdown content files in Stage 3. -->
+<ul class="catalogue">
+
+<li class="entry featured" id="sw-svplex">
+<div class="entry-title"><span class="tag tag-featured">Featured</span> <a href="https://github.com/bahlolab/SVPLEX">SVPLEX</a></div>
+<div class="entry-meta">GitHub repository</div>
+<p class="entry-desc">Cohort-level structural variant calling using an ensemble of six callers, with consensus filtering and read-depth validation.</p>
+<div class="entry-foot"><span class="entry-tags"><span class="tag">Structural variants</span> <span class="tag">Whole-genome sequencing</span> <span class="tag">Nextflow</span></span>
+<span class="entry-links"><a href="https://github.com/bahlolab/SVPLEX">GitHub</a> · <a href="https://doi.org/10.48550/arXiv.2608.11621">arXiv</a></span></div>
+</li>
+
+<li class="entry featured" id="sw-nf-cavalier">
+<div class="entry-title"><span class="tag tag-featured">Featured</span> <a href="https://github.com/bahlolab/nf-cavalier">nf-cavalier</a></div>
+<div class="entry-meta">GitHub repository</div>
+<p class="entry-desc">Rare disease variant annotation, prioritisation and reporting, with support for singleton, family and cohort analyses.</p>
+<div class="entry-foot"><span class="entry-tags"><span class="tag">Rare diseases</span> <span class="tag">Variant prioritisation</span> <span class="tag">Nextflow</span></span>
+<span class="entry-links"><a href="https://github.com/bahlolab/nf-cavalier">GitHub</a> · <a href="https://doi.org/10.64898/2026.08.06.743410">bioRxiv</a></span></div>
+</li>
+
+</ul>
 :::
 
 :::

@@ -12,8 +12,8 @@ website: {}
 format:
   html:
     theme:
-      light: [cosmo, styles.scss]
-      dark: [darkly, styles.scss]
+      light: [cosmo, theme-light.scss, styles.scss]
+      dark: [darkly, theme-dark.scss, styles.scss]
     page-layout: custom
     title-block-style: none
     toc: false
