@@ -6,3 +6,4 @@ contributes:
   shortcodes:
     - profile-links.lua
     - site-tabs.lua
+    - catalogue.lua

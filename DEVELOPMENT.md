@@ -14,10 +14,10 @@ All profile text lives in [`_variables.yml`](_variables.yml): name, qualificatio
 - `_partials/header.qmd`, `_partials/sidebar.qmd` — shared header and sidebar, included by each page.
 - `styles.scss` — layout (sticky sidebar on ≥992px, stacked on narrow screens).
 - `theme-light.scss`, `theme-dark.scss` — the "academic navy" palettes (Bootstrap variables plus the `--brand/--accent/--warm/--soft/…` tokens). Change colours only here; `styles.scss` (layout, type, components) is shared and uses the tokens, so light and dark differ only in colour.
-- `index.qmd` (Publications, homepage), `software.qmd`.
+- `index.qmd` (Publications, homepage), `software.qmd`; `content/` — catalogue entries.
 
-## Catalogue entries (temporary)
-Until Stage 3, entries are hardcoded HTML `<li class="entry">` blocks in `index.qmd` and `software.qmd`; copy an existing block to add one. Styling is shared (`.catalogue`/`.entry` in `styles.scss`).
+## Catalogue entries
+Entries are Markdown files in `content/publications/` and `content/software/`; the `catalogue` shortcode (`_extensions/profile/catalogue.lua`) renders them using the shared `.catalogue`/`.entry` styles in `styles.scss`. Schema and how to add an entry: [`content/README.md`](content/README.md).
 
 ## Automatic preview
 `.devcontainer/devcontainer.json` runs `.devcontainer/start-preview.sh` each time you attach to the codespace (`postAttachCommand`); it starts `quarto preview` on port 4200 unless it already responds, and opens the private forwarded port. Log: `/tmp/quarto-preview.log`. Applies after a rebuild or the next attach/restart.

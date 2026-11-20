@@ -14,26 +14,7 @@ pagetitle: "Publications — {{< var name >}}"
 {{< site-tabs >}}
 
 
-<!-- TEMPORARY hardcoded sample entries (Stage 2). Replaced by Markdown content files in Stage 3. -->
-<ul class="catalogue">
-
-<li class="entry featured" id="pub-svplex">
-<div class="entry-title"><span class="tag tag-featured">Featured</span> <a href="https://doi.org/10.48550/arXiv.2608.11621">SVPLEX: A Nextflow Pipeline for Cohort-level Structural Variant Calling</a></div>
-<div class="entry-meta">Jacob E. Munro, Mark F. Bennett, Melanie Bahlo · 2026 · arXiv preprint <span class="tag tag-role">First author</span></div>
-<p class="entry-desc">SVPLEX is a scalable Nextflow pipeline for detecting structural variants in short-read whole-genome sequencing data. It combines six complementary callers to produce consensus structural variant callsets for cohort-level analysis.</p>
-<div class="entry-foot"><span class="entry-tags"><span class="tag">Structural variants</span> <span class="tag">Whole-genome sequencing</span> <span class="tag">Nextflow</span></span>
-<span class="entry-links"><a href="https://doi.org/10.48550/arXiv.2608.11621">arXiv</a> · <a href="https://github.com/bahlolab/SVPLEX">GitHub</a></span></div>
-</li>
-
-<li class="entry featured" id="pub-nf-cavalier">
-<div class="entry-title"><span class="tag tag-featured">Featured</span> <a href="https://doi.org/10.64898/2026.08.06.743410">nf-cavalier: A Nextflow Pipeline for Rare Disease Variant Prioritization and Reporting</a></div>
-<div class="entry-meta">Jacob E. Munro, Joshua Reid, Melanie Bahlo, Mark F. Bennett · 2026 · bioRxiv preprint <span class="tag tag-role">First author</span></div>
-<p class="entry-desc">nf-cavalier is a Nextflow pipeline for prioritising candidate disease-causing variants in rare disease genomic datasets. It integrates variant annotation, phenotype-informed filtering and segregation analysis, producing interactive HTML reports and presentation-ready summaries.</p>
-<div class="entry-foot"><span class="entry-tags"><span class="tag">Rare diseases</span> <span class="tag">Variant prioritisation</span> <span class="tag">Nextflow</span></span>
-<span class="entry-links"><a href="https://doi.org/10.64898/2026.08.06.743410">bioRxiv</a> · <a href="https://github.com/bahlolab/nf-cavalier">GitHub</a></span></div>
-</li>
-
-</ul>
+{{< catalogue publications >}}
 :::
 
 :::

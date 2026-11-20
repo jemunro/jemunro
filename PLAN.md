@@ -10,7 +10,7 @@ Build a minimal Quarto/GitHub Pages portfolio with a **Publications** homepage a
 | 0 | Reproducible Codespaces environment | In progress / verify |
 | 1 | Website shell and private preview | Complete |
 | 2 | Placeholder catalogue entries and presentation | Complete |
-| 3 | Editable Markdown content model | Not started |
+| 3 | Editable Markdown content model | Complete (awaiting review) |
 | 4 | Search, filters, featured ordering | Not started |
 | 5 | GitHub Pages deployment | Not started |
 | 6 | Manual ORCID publication import | Not started |
@@ -106,3 +106,15 @@ Record milestone completion dates, decisions and relevant caveats here as the pr
 - Presentation decisions made during review: entries have no cross-links between tabs, only external links (publication venue/DOI and GitHub where relevant, labelled by venue name or "GitHub"); "academic navy" palette defined per mode in `theme-light.scss`/`theme-dark.scss` while `styles.scss` is shared so light and dark differ only in colour (system font stack, no web fonts); each featured entry has its own gold left rule; sidebar research focus shown as keyword chips and profile links have icons (Bootstrap Icons, bundled with Quarto; ORCID drawn in CSS).
 - Dev-environment additions: `.devcontainer/start-preview.sh` starts the private preview on attach; do not run `quarto render` into `_site/` while previewing (see `DEVELOPMENT.md`).
 - Review caveat: layout was checked by the site owner in the Codespaces preview; no automated visual/mobile test exists.
+
+### 2026-11-20 — Stage 3 complete (awaiting review)
+- Entries moved from hardcoded HTML to one Markdown file each: `content/publications/*.md`, `content/software/*.md` (YAML front matter + short Markdown body). Pages contain only `{{< catalogue publications >}}` / `{{< catalogue software >}}`. Schema, curated-vs-bibliographic field split and an add-entry example: `content/README.md`.
+- Publication fields: `id`, `title`, `doi`, `authors`, `date`, `venue`, `status` (preprint/published), `featured`, `roles` (list: first/senior/corresponding/coauthor), `tags`, `related-software`, `exclude`. Software fields: `id`, `title`, `github`, `date` (ordering only), `featured`, `tags`, `related-publications`, `exclude`.
+- Decision — custom Lua shortcode instead of a native Quarto listing: a listing was prototyped and rejected because (a) it cannot expose the Markdown body as the description (descriptions came back empty, even with the default template), (b) it forces rendering of a detail page per entry, contrary to the "no project-detail pages" design, and (c) it cannot join publications to software. `catalogue.lua` (~190 lines) reads the files, validates them, sorts and emits the same markup as Stage 2. No new dependencies.
+- Decision — cross-links are by ID and derived: a paper's GitHub link comes from its related software entry; a software entry's paper link (labelled with the venue) comes from the related publication. URLs are never duplicated across files. `exclude: true` also removes links to that entry.
+- Decision — separation for future automation: curated fields (`featured`, `roles`, `tags`, `exclude`, `related-*`, body) live only in `content/` and are never to be written by importers; generated metadata (ORCID/OpenAlex/GitHub, citation JSON) will live in a separate location (e.g. `data/`) from Stage 6 onward. Bibliographic fields currently in the entry files (`title`, `doi`, `authors`, `date`, `venue`) are the interim source; how importers merge with them is for Stage 6/7 to decide.
+- Decision — ordering (featured, then newest `date`, then title) is implemented in the shortcode because the page needs a deterministic order; Stage 4 still owns search, filters and any UI for ordering. Month-only dates sort as the latest of that month; this keeps the Stage 2 order. The sample software `date` values copy the associated paper's date for ordering only (not verified release dates).
+- Tags are still free text; the controlled vocabulary and its validation are Stage 4.
+- Verified: `quarto render` (to a separate output dir; preview was running) succeeds without warnings; output markup (order, badges, tags, links, ids) is identical to Stage 2 apart from line-wrapping of description text. Tested: edited a description (appeared), added a temporary publication + software pair with senior/corresponding badges and cross-links (appeared, correct links), `exclude: true` (hidden, link removed), invalid role (build error naming the file), then removed the temporary files (back to two entries each). Preview refreshes after content edits when a page `.qmd` is saved (tested).
+- Not verified: visual appearance in a browser (markup unchanged, so none expected).
+- Note: the acceptance criterion says "README"; the root `README.md` is the GitHub profile README (untouched), so the schema is in `content/README.md`.
