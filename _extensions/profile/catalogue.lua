@@ -83,11 +83,13 @@ local function by_id(entries)
   return t
 end
 
--- Featured first, then newest first, then title (stable, deterministic).
-local function sort_entries(entries)
+-- Default order (also the no-JavaScript order): featured first, then newest first when by_date
+-- (publications) or alphabetical (software). catalogue.js can re-sort on request; authorship
+-- roles never affect order.
+local function sort_entries(entries, by_date)
   table.sort(entries, function(a, b)
     if a.featured ~= b.featured then return a.featured end
-    if a.sort ~= b.sort then return a.sort > b.sort end
+    if by_date and a.sort ~= b.sort then return a.sort > b.sort end
     return a.title:lower() < b.title:lower()
   end)
 end
@@ -107,11 +109,14 @@ end
 
 local function render_entry(prefix, e, title_url, meta_html, links)
   local tags = {}
-  for _, t in ipairs(e.tags) do tags[#tags + 1] = '<span class="tag">' .. esc(t) .. '</span>' end
+  for _, t in ipairs(e.tags) do
+    tags[#tags + 1] = '<button type="button" class="tag tag-kw" data-tag="' .. esc(t) .. '">' .. esc(t) .. '</button>'
+  end
   local lk = {}
   for _, l in ipairs(links) do lk[#lk + 1] = '<a href="' .. esc(l.url) .. '">' .. esc(l.label) .. '</a>' end
   return table.concat({
-    string.format('<li class="entry%s" id="%s-%s">', e.featured and " featured" or "", prefix, esc(e.id)),
+    string.format('<li class="entry%s" id="%s-%s" data-featured="%s" data-date="%s" data-title="%s">',
+      e.featured and " featured" or "", prefix, esc(e.id), tostring(e.featured), esc(e.sort), esc(e.title)),
     '<div class="entry-title">' .. (e.featured and '<span class="tag tag-featured">Featured</span> ' or "")
       .. '<a href="' .. esc(title_url) .. '">' .. esc(e.title) .. '</a></div>',
     '<div class="entry-meta">' .. meta_html .. '</div>',
@@ -157,7 +162,7 @@ local function build(kind)
 
   local out = {}
   if kind == "publications" then
-    sort_entries(pubs)
+    sort_entries(pubs, true)
     for _, p in ipairs(pubs) do
       if not p.exclude then
         local meta = {}
@@ -179,7 +184,7 @@ local function build(kind)
       end
     end
   else
-    sort_entries(sws)
+    sort_entries(sws, false)
     for _, s in ipairs(sws) do
       if not s.exclude then
         local links = { { label = "GitHub", url = s.github } }
@@ -191,7 +196,8 @@ local function build(kind)
       end
     end
   end
-  return '<ul class="catalogue">\n' .. table.concat(out, "\n") .. '\n</ul>'
+  return '<div class="catalogue-app" data-kind="' .. kind .. '">\n<ul class="catalogue">\n'
+    .. table.concat(out, "\n") .. '\n</ul>\n</div>'
 end
 
 return {
@@ -200,6 +206,10 @@ return {
     if kind ~= "publications" and kind ~= "software" then
       error("catalogue: argument must be 'publications' or 'software'", 0)
     end
+    quarto.doc.add_html_dependency({
+      name = "catalogue", version = "1.0.0",
+      scripts = { { path = "catalogue.js", afterBody = true } },
+    })
     return pandoc.RawBlock("html", build(kind))
   end
 }

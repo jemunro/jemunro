@@ -11,7 +11,7 @@ Build a minimal Quarto/GitHub Pages portfolio with a **Publications** homepage a
 | 1 | Website shell and private preview | Complete |
 | 2 | Placeholder catalogue entries and presentation | Complete |
 | 3 | Editable Markdown content model | Complete (awaiting review) |
-| 4 | Search, filters, featured ordering | Not started |
+| 4 | Search, filters, featured ordering | Complete (awaiting review) |
 | 5 | GitHub Pages deployment | Not started |
 | 6 | Manual ORCID publication import | Not started |
 | 7 | Identity matching, preprint relationships and exclusions | Not started |
@@ -118,3 +118,11 @@ Record milestone completion dates, decisions and relevant caveats here as the pr
 - Verified: `quarto render` (to a separate output dir; preview was running) succeeds without warnings; output markup (order, badges, tags, links, ids) is identical to Stage 2 apart from line-wrapping of description text. Tested: edited a description (appeared), added a temporary publication + software pair with senior/corresponding badges and cross-links (appeared, correct links), `exclude: true` (hidden, link removed), invalid role (build error naming the file), then removed the temporary files (back to two entries each). Preview refreshes after content edits when a page `.qmd` is saved (tested).
 - Not verified: visual appearance in a browser (markup unchanged, so none expected).
 - Note: the acceptance criterion says "README"; the root `README.md` is the GitHub profile README (untouched), so the schema is in `content/README.md`.
+
+### 2026-11-20 — Stage 4 complete (awaiting review)
+- Added to both catalogues: text search (title, description and keywords; all words must match), keyword filtering by clicking keywords on entries (multi-select, AND; no separate keyword bar, active keywords are named in the status line), clickable keywords on every entry, a sort menu, a Clear button (shown only when something is active), a result count and a "no results" message with a clear button. State is per page, so Publications and Software are independent.
+- Layout: the search box, sort menu and Clear button sit in the tab bar to the right of the tabs (JS moves them there), wrapping under the tabs on narrow screens.
+- Decision — native Quarto listings were not used (rejected in Stage 3 for reasons that still hold, and they cannot produce the featured-first ordering over Markdown-body descriptions without detail pages). Instead one small vanilla-JS file, `_extensions/profile/catalogue.js` (~140 lines, no dependencies), is attached by the `catalogue` shortcode. It derives search text and keyword filters from the rendered entries, so adding a Markdown entry makes it searchable and its keywords filterable with no other change. Keywords match case-insensitively (the first spelling is displayed). No JavaScript: the plain list still shows in default order and keywords are inert buttons.
+- Ordering: default is featured first, then publications newest-first / software A–Z (Lua sets this order in the HTML, JS reproduces it). Software `date` no longer drives default order, only the optional "Newest first" sort. Other sorts (publications: newest, oldest, title; software: A–Z, Z–A, newest) ignore the featured flag. Authorship badges never affect order.
+- Not done: controlled-vocabulary *validation* (keywords are derived, not checked against a list); search state is not kept in the URL.
+- Verified: `quarto render` succeeds without warnings; temporary entries (featured/non-featured, mixed-case duplicate keyword, future/older dates) checked, then removed. Because the container has no browser, the script was run against the rendered pages in jsdom (via Quarto's Deno): default order, search, no-result state, clear, click-to-filter and every sort option behaved as specified, with no script errors. Not verified: appearance in a real browser (light/dark, mobile layout) and real-browser console — needs review in the Codespaces preview.

@@ -41,7 +41,7 @@ Planned separation: future importers write to a separate generated location (e.g
 | `featured`, `tags`, `exclude` | no | As for publications. |
 | `related-publications` | no | List of publication `id`s. Each adds a link to that paper (labelled with its venue). |
 
-Order on both pages: featured entries first, then newest `date`, then title.
+Order: featured entries first, then publications newest `date` first and software alphabetically. Visitors can also search, filter by keyword and re-sort in the browser; keywords are derived from the `tags` of the entries (matched case-insensitively), so there is no separate keyword list.
 
 ## Example: add a publication
 Create `content/publications/my-paper.md`:

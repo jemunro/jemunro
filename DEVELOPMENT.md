@@ -17,7 +17,7 @@ All profile text lives in [`_variables.yml`](_variables.yml): name, qualificatio
 - `index.qmd` (Publications, homepage), `software.qmd`; `content/` — catalogue entries.
 
 ## Catalogue entries
-Entries are Markdown files in `content/publications/` and `content/software/`; the `catalogue` shortcode (`_extensions/profile/catalogue.lua`) renders them using the shared `.catalogue`/`.entry` styles in `styles.scss`. Schema and how to add an entry: [`content/README.md`](content/README.md).
+Search, keyword filters and sorting are done by `_extensions/profile/catalogue.js` (vanilla JS, derives everything from the rendered entries). Entries are Markdown files in `content/publications/` and `content/software/`; the `catalogue` shortcode (`_extensions/profile/catalogue.lua`) renders them using the shared `.catalogue`/`.entry` styles in `styles.scss`. Schema and how to add an entry: [`content/README.md`](content/README.md).
 
 ## Automatic preview
 `.devcontainer/devcontainer.json` runs `.devcontainer/start-preview.sh` each time you attach to the codespace (`postAttachCommand`); it starts `quarto preview` on port 4200 unless it already responds, and opens the private forwarded port. Log: `/tmp/quarto-preview.log`. Applies after a rebuild or the next attach/restart.

@@ -123,6 +123,28 @@ body { font-size: .94rem; line-height: 1.5; -webkit-font-smoothing: antialiased;
 }
 .entry-meta .tag { margin-left: .3rem; }
 
+// Clickable keywords and their active state
+button.tag-kw {
+  border: 0; cursor: pointer; font-family: inherit;
+  &:hover { background: color-mix(in srgb, var(--accent) 22%, var(--soft)); }
+  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  &.active { background: var(--brand); color: var(--bs-body-bg); }
+}
+
+// Search / sort / keyword toolbar (built by catalogue.js; absent without JavaScript)
+.catalogue-bar { margin: 0; font-size: .85rem; }
+.catalogue-row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.catalogue-search { flex: 1 1 14rem; min-width: 0; font-size: .85rem; }
+.catalogue-sort { flex: 0 1 15rem; font-size: .85rem; }
+.catalogue-clear, .catalogue-clear-inline {
+  font-size: .8rem; color: var(--accent); border: 1px solid var(--rule); background: transparent;
+  &:hover { background: var(--soft); color: var(--brand); }
+}
+.catalogue-status:not(:empty) { margin: -.5rem 0 .9rem; }
+.catalogue-status { color: var(--muted); font-size: .8rem; }
+.catalogue-empty { color: var(--muted); padding: 1rem 0; }
+[hidden] { display: none !important; }
+
 // ---- Academic navy: component colours ----
 a { text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: .15em; }
@@ -153,4 +175,17 @@ a:hover { text-decoration: underline; text-underline-offset: .15em; }
   display: inline-flex; align-items: center; justify-content: center;
   width: .95rem; height: .95rem; border: 1.5px solid currentColor; border-radius: 50%;
   font: 700 .44rem/1 var(--bs-body-font-family); letter-spacing: 0; font-style: normal;
+}
+
+// Search/sort share the tab bar: tabs left, controls right (wrapping under the tabs on narrow screens)
+.site-tabs {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: .5rem 1rem;
+  border-bottom: 1px solid var(--rule);
+  .nav-tabs { border-bottom: 0; flex: none; }
+  .catalogue-row.in-tabs { flex: 1 1 18rem; justify-content: flex-end; padding-bottom: .3rem; flex-wrap: nowrap; }
+  .catalogue-search { flex: 1 1 8rem; max-width: 20rem; }
+  .catalogue-sort { flex: 0 1 13rem; }
+}
+@media (max-width: 575.98px) {
+  .site-tabs .catalogue-row.in-tabs { flex-basis: 100%; }
 }
